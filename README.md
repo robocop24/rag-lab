@@ -1,6 +1,6 @@
 # 🧠 RAG Lab — Hands-On Retrieval-Augmented Generation
 
-A collection of **7 progressive RAG implementations** exploring different retrieval, chunking, and search strategies — from basic TF-IDF to hybrid semantic+keyword fusion, all powered by DeepSeek and built with FAISS, SentenceTransformers, and scikit-learn.
+A collection of **8 progressive RAG implementations** exploring different retrieval, chunking, and search strategies — from basic TF-IDF to hybrid semantic+keyword fusion, all powered by DeepSeek and built with FAISS, SentenceTransformers, and scikit-learn.
 
 ---
 
@@ -31,6 +31,13 @@ RAG_Learning/
 │   ├── chunker.py
 │   ├── embeddings.py          # SentenceTransformer (MiniLM)
 │   └── vector_store.py        # Manual numpy cosine similarity
+│
+├── topk_rag/                  # 🔹 Configurable top-k FAISS RAG + LLM
+│   ├── main.py                # Tunable retrieval depth (k)
+│   ├── chunker.py
+│   ├── embeddings.py
+│   ├── faiss_store.py         # FAISS IndexFlatL2
+│   └── retriever.py
 │
 ├── faiss_rag/                 # 🔹 FAISS semantic RAG + LLM
 │   ├── main.py                # Full pipeline: chunk → embed → index → retrieve → LLM
@@ -82,6 +89,7 @@ echo DEEPSEEK_API_KEY="sk-your-key-here" > .env
 
 # 5. Run any RAG pipeline
 python faiss_rag/main.py        # FAISS semantic search + LLM
+python topk_rag/main.py         # Configurable top-k FAISS retrieval + LLM
 python metadata_rag/main.py     # Metadata-filtered retrieval + LLM
 python semantic_rag/main.py     # Pure semantic similarity (no LLM)
 python tfidf_rag/main.py        # TF-IDF keyword matching (no LLM)
@@ -99,6 +107,7 @@ python chunking_strategies/compare.py  # Chunking strategy comparison
 | `tfidf_rag` | Sparse TF-IDF | sklearn cosine | ❌ | Lexical/word-level matching |
 | `semantic_rag` | Dense embeddings | numpy cosine | ❌ | Meaning-aware semantic similarity |
 | `faiss_rag` | Dense embeddings | FAISS Flat L2 | ✅ DeepSeek | Scalable vector search + answer generation |
+| `topk_rag` | Dense embeddings | FAISS Flat L2 | ✅ DeepSeek | Configurable retrieval depth (top-k tuning) |
 | `metadata_rag` | Filtered dense | FAISS Flat L2 | ✅ DeepSeek | Pre-filtering by structured metadata |
 | `hybrid_rag` | Semantic + keyword | custom fusion | ❌ | Weighted ensemble retrieval |
 
@@ -119,8 +128,9 @@ graph LR
     A[chunking_strategies] --> B[tfidf_rag]
     B --> C[semantic_rag]
     C --> D[faiss_rag]
-    D --> E[metadata_rag]
-    D --> F[hybrid_rag]
+    D --> E[topk_rag]
+    E --> F[metadata_rag]
+    E --> G[hybrid_rag]
 ```
 
 1. **Chunking** — Understand how text splitting affects retrieval quality
