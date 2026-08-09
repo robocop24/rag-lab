@@ -1,0 +1,11 @@
+Customer Portal
+
+Users can login using email and password.
+
+Users can download invoice.
+
+Users can update profile information.
+
+Users can reset forgetten passwords.
+
+Administrators can manage users.
