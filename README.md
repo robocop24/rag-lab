@@ -1,6 +1,6 @@
 # 🧠 RAG Lab — Hands-On Retrieval-Augmented Generation
 
-A collection of **8 progressive RAG implementations** exploring different retrieval, chunking, and search strategies — from basic TF-IDF to hybrid semantic+keyword fusion, all powered by DeepSeek and built with FAISS, SentenceTransformers, and scikit-learn.
+A collection of **progressive RAG implementations** exploring different retrieval, chunking, and search strategies — from basic TF-IDF to hybrid semantic+keyword fusion, including fixed, overlap, paragraph, and semantic chunking. Powered by DeepSeek and built with FAISS, SentenceTransformers, and scikit-learn.
 
 ---
 
@@ -18,7 +18,8 @@ RAG_Learning/
 │   ├── compare.py             # Side-by-side comparison runner
 │   ├── fixed_chunker.py       # Fixed-size chunking
 │   ├── overlap_chunker.py     # Sliding-window with overlap
-│   └── paragraph_chunker.py   # Paragraph-based splitting
+│   ├── paragraph_chunker.py   # Paragraph-based splitting
+│   └── semantic_chunker.py    # Embedding-based semantic chunking
 │
 ├── tfidf_rag/                 # 🔹 Sparse TF-IDF retrieval (no LLM)
 │   ├── main.py

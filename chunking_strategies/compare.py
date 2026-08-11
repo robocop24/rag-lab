@@ -3,6 +3,7 @@ from pathlib import Path
 from fixed_chunker import chunk_text as fixed_chunk
 from overlap_chunker import chunk_text as overlap_chunk
 from paragraph_chunker import chunk_text as paragraph_chunk
+from semantic_chunker import chunk_text as semantic_chunk
 
 FILE_PATH = str(Path(__file__).parent.parent / "documents" / "portal.txt")
 
@@ -38,11 +39,15 @@ def main():
         overlap=15
         );
     
+    semantic_chunks = semantic_chunk(FILE_PATH)
+    
     print("Paragraph chunks: ", paragraph_chunks)
     
     print("Fixed chunks: ", fixed_chunks)
     
     print("Overlap chunks: ", overlap_chunks)
+    
+    print_chunks("Semantic chunks: ", semantic_chunks)
     
 if __name__ == "__main__":
     main()
